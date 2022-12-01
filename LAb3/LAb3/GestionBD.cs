@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -100,4 +101,157 @@ namespace LAb3
                 }
             }
         }
+
+    public ObservableCollection<Employe> getEmployes()
+    {
+        try
+        {
+            liste.Clear();
+
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from employe";
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+
+            while (r.Read())
+            {
+
+                liste.Add(new Employe()
+                {
+                    Matricule = r.GetString(0),
+                    Nom = r.GetString(1),
+                    Prenom = r.GetString(2)
+
+                });
+
+            }
+
+            r.Close(); con.Close();
+            return liste;
+
+        }
+        catch (MySqlException ex)
+        {
+            if (con.State == System.Data.ConnectionState.Open)
+            {
+                con.Close();
+            }
+            return null;
+        }
+
+    }
+    public ObservableCollection<Employe> rechercher_employeN(string name)
+    {
+        try
+        {
+            liste.Clear();
+
+
+
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from employe where nom = '" + name + "'";
+
+
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+
+                liste.Add(new Employe()
+                {
+                    Matricule = r.GetString(0),
+                    Nom = r.GetString(1),
+                    Prenom = r.GetString(2)
+
+                });
+
+            }
+
+            r.Close();
+            con.Close();
+            return liste;
+
+        }
+        catch (MySqlException ex)
+        {
+            if (con.State == System.Data.ConnectionState.Open)
+            {
+                con.Close();
+            }
+            return null;
+        }
+
+    }
+    public ObservableCollection<Employe> rechercher_employeP(string prename)
+    {
+        try
+        {
+            liste.Clear();
+
+            MySqlCommand commande = new MySqlCommand(); commande.Connection = con; commande.CommandText = "Select * from employe where prenom = '" + prename + "'";
+
+            con.Open(); MySqlDataReader r = commande.ExecuteReader(); while (r.Read())
+            {
+
+                liste.Add(new Employe()
+                {
+                    Matricule = r.GetString(0),
+                    Nom = r.GetString(1),
+                    Prenom = r.GetString(2)
+
+                });
+
+            }
+
+            r.Close(); con.Close(); return liste;
+
+        }
+        catch (MySqlException ex) { if (con.State == System.Data.ConnectionState.Open) { con.Close(); } return null; }
+
+    }
+
+    public ObservableCollection<Employe> GetEmploye()
+    {
+        liste.Clear();
+        MySqlCommand commande = new MySqlCommand();
+        commande.Connection = con;
+        commande.CommandText = "Select * from employe ";
+        con.Open();
+        MySqlDataReader r = commande.ExecuteReader();
+        try
+        {
+
+            while (r.Read())
+            {
+                Employe c = new Employe()
+                {
+                    Matricule = r.GetString("matricule"),
+                    Nom = r.GetString("nom"),
+                    Prenom = r.GetString("prenom")
+
+                };
+                liste.Add(c);
+
+            }
+            r.Close();
+            con.Close();
+            return liste;
+        }
+        catch (MySqlException ex)
+        {
+            if (con.State == System.Data.ConnectionState.Open)
+                con.Close();
+            return null;
+        }
+
+
+
+
+
+
+    }
 }
