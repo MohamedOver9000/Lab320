@@ -27,5 +27,15 @@ namespace LAb3
         {
             this.InitializeComponent();
         }
+
+        private void iRechercherN_Click(object sender, RoutedEventArgs e)
+        {
+            Affiche.ItemsSource = GestionBD.getInstance().rechercher_employeN(RechercheN.Text);
+        }
+
+        private void iRechercherP_Click(object sender, RoutedEventArgs e)
+        {
+            Affiche.ItemsSource = GestionBD.getInstance().rechercher_employeP(RechercheP.Text);
+        }
     }
 }
