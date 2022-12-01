@@ -26,6 +26,7 @@ namespace LAb3
         public AffichageP()
         {
             this.InitializeComponent();
+            listeEmploye.ItemsSource = GestionBD.getInstance().GetEmploye();
         }
     }
 }
