@@ -26,11 +26,33 @@ namespace LAb3
         public MainWindow()
         {
             this.InitializeComponent();
+             mainFrame.Navigate(typeof(Affichage));
         }
 
-        private void myButton_Click(object sender, RoutedEventArgs e)
-        {
-            myButton.Content = "Clicked";
-        }
+        var item = (NavigationViewItem)args.SelectedItem;
+            Header.Text = item.Tag.ToString();
+
+            switch (item.Content)
+            {
+                case "Ajouter employe":
+                    mainFrame.Navigate(typeof(AjoutEmploye));
+                    break;
+                case "Ajouter projet":
+                    mainFrame.Navigate(typeof(AjoutProjet));
+                    break;
+                case "RechercherE":
+                    mainFrame.Navigate(typeof(RechercherEmploye));
+                    break;
+                case "RechercherP":
+                    mainFrame.Navigate(typeof(RechercherProjet));
+                    break;
+                case "AffichageE":
+                    mainFrame.Navigate(typeof(AffichageP));
+                    break;
+                case "AffichageP":
+                    mainFrame.Navigate(typeof(Affichage));
+                    break;
+                default:
+                    break;
     }
 }

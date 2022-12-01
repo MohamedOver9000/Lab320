@@ -7,7 +7,31 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
-    </StackPanel>
+  <NavigationView PaneDisplayMode="Left"
+                  PaneTitle="Menu"
+                  IsBackButtonVisible="Collapsed"
+                  IsSettingsVisible="True"
+                  SelectionChanged="NavigationView_SelectionChanged"
+                  Background="#C4FBFF">
+
+    <NavigationView.Header>
+      <TextBlock Text="Liste des projets" x:Name="Header" />
+    </NavigationView.Header>
+
+    <NavigationView.MenuItems>
+      <NavigationViewItemHeader Content="Employés"/>
+      <NavigationViewItem Content="Ajouter employe" Tag="Ajout employe" Icon="People"/>
+      <NavigationViewItem Content="RechercherE" Tag="Rechercher les employés" Icon="Find"/>
+      <NavigationViewItem Content="AffichageE" Tag="Liste des employés" Icon="People"/>
+      <NavigationViewItemSeparator />
+      <NavigationViewItemHeader Content="Projets"/>
+      <NavigationViewItem Content="Ajouter projet" Tag="Ajout projet" Icon="People"/>
+      <NavigationViewItem Content="RechercherP" Tag="Afficher et rechercher les projets" Icon="Find"/>
+      <NavigationViewItem Content="AffichageP" Tag="Liste des projet" Icon="People"/>
+
+    </NavigationView.MenuItems>
+
+    <Frame x:Name="mainFrame"  Background="#CFCFCF"/>
+
+  </NavigationView>
 </Window>
