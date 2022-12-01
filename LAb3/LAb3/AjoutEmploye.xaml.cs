@@ -18,6 +18,7 @@ using Windows.Foundation.Collections;
 
 namespace LAb3
 {
+    bool valide = true;
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -26,6 +27,66 @@ namespace LAb3
         public AjoutEmploye()
         {
             this.InitializeComponent();
+        }
+
+         private void btAjouter_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                validation();
+                if (valide == true)
+                {
+                    Employe a = new Employe()
+                    {
+                        Matricule = matricule.Text,
+                        Nom = nom.Text,
+                        Prenom = prenom.Text
+                    };
+
+                    GestionBD.getInstance().ajouter_employe(a);
+
+                }
+            }
+            catch (FormatException v)
+            {
+
+            }
+        }
+
+        private void validation()
+        {
+            reset();
+            if (matricule.Text == "")
+            {
+                valide = false;
+                erreurMatricule.Text = "La matricule est obligatoire";
+            }
+
+            if (nom.Text == "")
+            {
+                valide = false;
+                erreurNom.Text = "Le nom est obligatoire";
+            }
+
+            if (prenom.Text == "")
+            {
+                valide = false;
+                erreurPrenom.Text = "Le prenom est obligatoire";
+            }
+
+            else
+            {
+                valide = true;
+            }
+
+        }
+
+        public void reset()
+        {
+            erreurMatricule.Text = "";
+            erreurNom.Text = "";
+            erreurPrenom.Text = "";
+
         }
     }
 }

@@ -8,7 +8,16 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+  <StackPanel Padding="50" HorizontalAlignment="Left">
 
-    </Grid>
+    <TextBox x:Name="matricule" Header="Matricule" Margin="5" MinWidth="200"/>
+    <TextBlock x:Name="erreurMatricule" Foreground="Red"/>
+    <TextBox x:Name="nom" Header="Nom" Margin="5" MinWidth="200" />
+    <TextBlock x:Name="erreurNom" Foreground="Red"/>
+    <TextBox x:Name="prenom" Header="Prenom" Margin="5" MinWidth="200"/>
+    <TextBlock x:Name="erreurPrenom" Foreground="Red"/>
+
+
+    <Button x:Name="btAjouter" Background="BlanchedAlmond" Click="btAjouter_Click"  >Ajouter</Button>
+  </StackPanel>
 </Page>
