@@ -248,10 +248,91 @@ namespace LAb3
             return null;
         }
 
+    }
+
+    public ObservableCollection<Projet> rechercher_Projet(DateTime date)
+    {
+        try
+        {
+            liste2.Clear();
+
+
+
+            MySqlCommand commande = new MySqlCommand();
+            commande.Connection = con;
+            commande.CommandText = "Select * from projet where debut = '" + date + "'";
+
+
+
+            con.Open();
+            MySqlDataReader r = commande.ExecuteReader();
+            while (r.Read())
+            {
+
+                liste2.Add(new Projet()
+                {
+                    Numero = r.GetString("numero"),
+                    Debut = Convert.ToDateTime(r.GetString("debut")),
+                    Budget = r.GetInt32("budget"),
+                    Description = r.GetString("description"),
+                    Employe = r.GetString("employe")
+                });
 
 
 
 
+            }
+
+            r.Close();
+            con.Close();
+            return liste2;
+
+        }
+        catch (MySqlException ex)
+        {
+            if (con.State == System.Data.ConnectionState.Open)
+            {
+                con.Close();
+            }
+            return null;
+        }
+
+    }
+
+    public ObservableCollection<Projet> GetProjets()
+    {
+        liste2.Clear();
+        MySqlCommand commande = new MySqlCommand();
+        commande.Connection = con;
+        commande.CommandText = "Select * from projet ";
+        con.Open();
+        MySqlDataReader r = commande.ExecuteReader();
+        try
+        {
+            while (r.Read())
+            {
+                Projet c = new Projet()
+                {
+                    Numero = r.GetString("numero"),
+                    Debut = Convert.ToDateTime(r.GetString("debut")),
+                    Description = r.GetString("description"),
+                    Budget = r.GetInt32("budget"),
+                    Employe = r.GetString("employe"),
+
+                };
+                liste2.Add(c);
+
+            }
+            r.Close();
+            con.Close();
+            return liste2;
+        }
+        catch (MySqlException ex)
+        {
+            if (con.State == System.Data.ConnectionState.Open)
+                con.Close();
+            return null;
+        }
 
     }
 }
