@@ -23,9 +23,54 @@ namespace LAb3
     /// </summary>
     public sealed partial class RechercherProjet : Page
     {
+        bool valide = true;
         public RechercherProjet()
         {
             this.InitializeComponent();
+
+        }
+
+        private void iRechercherProjet_Click(object sender, RoutedEventArgs e)
+        {
+            validation();
+            if (valide)
+            {
+                lvProjet.ItemsSource = GestionBD.getInstance().rechercher_Projet(Convert.ToDateTime(RechercheProjet.Date.Value.ToString("dddd dd MMMM yyyy")));
+            }
+        }
+
+        private void validation()
+        {
+            reset();
+
+            try
+            {
+                if (RechercheProjet.Date == null)
+                {
+                    valide = false;
+                    tblErreurRN.Text = "La date du trajet est obligatoire, une date est mise par défaut. Veuillez le changer s'il vous plaît";
+                }
+
+                else
+                {
+                    valide = true;
+                }
+
+            }
+            catch (InvalidOperationException ex)
+            {
+
+                RechercheProjet.Date = new DateTime(2021, 05, 05);
+                tblErreurRN.Text = "La date du trajet est obligatoire, une date est mise par défaut. Veuillez le changer s'il vous plaît";
+
+            }
+        }
+
+        private void reset()
+        {
+            tblErreurRN.Text = "";
+
         }
     }
+
 }
