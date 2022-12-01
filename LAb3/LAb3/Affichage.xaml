@@ -9,6 +9,38 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Frame x:Name="mainFrame">
+            <ListView x:Name="listeProjet">
+
+                <DataTemplate x:DataType="local:Projet">
+
+
+
+                    <Grid Margin="0,12,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" MinWidth="150"/>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+
+
+                        <StackPanel Margin="12,0,0,0" Grid.Column="1"  HorizontalAlignment="Stretch">
+
+
+
+                            <TextBlock Text="{x:Bind Numero}"  Margin="5,5,5,10"  VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20" />
+                            <TextBlock Text="{x:Bind Budget}"  Margin="5,5,5,10" FontSize="20"/>
+                            <TextBlock Text="{x:Bind Description}" Margin="5,5,5,10" FontSize="20" />
+                            <TextBlock Text="{x:Bind Employe}" Margin="5,5,5,10" FontSize="20"/>
+
+
+
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+
+            </ListView>
+        </Frame>
 
     </Grid>
 </Page>
